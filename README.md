@@ -193,40 +193,43 @@ class Vector2D(RealVector):
         r=0
         for i in range(self._dim):
             r+=self.coord[i]**2
-        return r**1/2
-
-# Eu fiz(Questão 2)
-   
+        return r**(1/2)
 #Questão 3
 class Vector3D(RealVector):
     _dim = 3
     def __init__(self, coord):
         if len(coord) != 3:
-          raise ValueError
+            raise ValueError
         super().__init__(self._dim, coord)
+
+
     @staticmethod
-    def __builder(coord):
+    def _builder(coord):
         return Vector3D(coord)
-    def __add__(self, other_vector):
-        return super().__add__(other_vector)
+    
+
+    """def CW(self):
+        return Vector3D([-self.coord[1], self.coord[0]])
+    
+
+    def CCW(self):
+        return Vector3D([self.coord[1], -self.coord[0]])"""
+    
+    def __add__(self, other__vector):
+        return super().__add__(other__vector)
     def __mul__(self, alpha):
         return super().__mul__(alpha)
     def __rmul__(self, f):
         return super().__rmul__(f)
-    def __sub__(self,other_vector):
-        return super().__add__(other_vector*(-1))
+    def __sub__(self,other__vector):
+        return super().__add__(other__vector*(-1))
     def abs(self):
         r=0
         for i in range(self._dim):
             r+=self.coord[i]**2
         return r**(1/2)
+   
 
-    def CW(self):
-        return Vector3D([-self.coord[1], self.coord[0]])
-    
-
-    def CCW(self):
-        return Vector3D([self.coord[1], -self.coord[0]])
 
 
 if __name__ == '__main__':
@@ -234,12 +237,25 @@ if __name__ == '__main__':
     print('V2 = ', V2)
     W2 = Vector2D([3, 4])
     print('W2 = ', W2)
-
+    V3 = Vector3D([1, 2,15])
+    print('V3 = ', V3)
+    W3 = Vector3D([2, 2, 1])
+    print('W3 = ', W3)
 
     print(V2.getVectorSpace())
 
     r = V2+4*W2
+    abs_r= W2.abs()
+    print("abs([3,4])=",abs_r)
     print('V2 + 4*W2 =', r)
     print('(V2 + 4*W2).CW() = ', r.CW())
     print('W2.CCW() = ', W2.CCW())
     print('V2.iner_prod(W2) = ', V2.iner_prod(W2))
+
+    r = V3+4*W3
+    abs_r= W3.abs()
+    print("abs([2,2,1])=",abs_r)#3
+    print('V3 + 4*W3 =', r)
+    #print('(V2 + 4*W2).CW() = ', r.CW())
+    #print('W2.CCW() = ', W2.CCW())
+    print('V2.iner_prod(W2) = ', V3.iner_prod(W3))

@@ -24,7 +24,13 @@ print(Subir_escadas(10))#89
     def _rmul_(self, f):
         return super()._rmul_(f)
     def _sub_(self,other_vector):
-        return super()._add_(other_vector*(-1))"""
+        return super()._add_(other_vector*(-1))
+    def abs(self):
+        r=0
+        for i in range(self.dim):
+            r+=self.coord[i]**2
+        return r**1/2
+        """
 # Oque tá no git
 class Field:
     pass
@@ -175,6 +181,11 @@ class Vector2D(RealVector):
         return super()._rmul_(f)
     def _sub_(self,other_vector):
         return super()._add_(other_vector*(-1))
+    def abs(self):
+        r=0
+        for i in range(self.dim):
+            r+=self.coord[i]**2
+        return r**(1/2)
 
     def CW(self):
         return Vector2D([-self.coord[1], self.coord[0]])
@@ -183,7 +194,8 @@ class Vector2D(RealVector):
     def CCW(self):
         return Vector2D([self.coord[1], -self.coord[0]])
    
-if _name_ == '_main_':
+print(__name__)
+if __name__ == '__main__':
     V2 = Vector2D([1, 2])
     print('V2 = ', V2)
     W2 = Vector2D([3, 4])

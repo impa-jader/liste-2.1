@@ -259,3 +259,60 @@ if __name__ == '__main__':
     #print('(V2 + 4*W2).CW() = ', r.CW())
     #print('W2.CCW() = ', W2.CCW())
     print('V2.iner_prod(W2) = ', V3.iner_prod(W3))
+import math
+###
+class Ev_polly(VectorSpace):
+    _dim=math.inf
+    def __init__(self,polinomio):
+        self.coord= polinomio
+    
+    def __add__(self, pol2):
+        r= self.coord.copy()
+        for k in pol2.coord.keys():
+            if k in r.coord.keys():
+                r[k]+= pol2.coord[k]
+            else:
+                r[k]= pol2[k]
+        return r
+    
+    def __mul__(self, a):
+         r= self.coord.copy()
+         for k in r.coord.keys():
+             r[k]=r[k]*a
+        return r
+    
+    def __rmul__(self, a):
+         r= self.coord.copy()
+         for k in r.coord.keys():
+             r[k]=r[k]*a
+        return r
+    def __add__(self, pol2):
+        r= self.coord.copy()
+        for k in pol2.coord.keys():
+            if k in r.coord.keys():
+                r[k]+= pol2.coord[k]*(-1)
+            else:
+                r[k]= pol2[k]*(-1)
+        return r
+
+
+
+
+
+#5 
+"""import collections
+import random
+class FrenchDeck:
+    ranks = [str(n) for n in range(2, 11)] + list('JQKA')
+    suits = 'spades diamonds clubs hearts'.split()
+    def __init__(self):
+        self._cards = [Card(rank, suit) for suit in self.suits for rank in self.ranks]
+    def __len__(self):
+        return len(self._cards)
+    def __getitem__(self, position):
+        return self._cards[position]
+    def __setitem__(self,carta,position_b):
+      self._cards[position_b] = carta
+myDeck = FrenchDeck()
+print(myDeck[1])
+random.shuffle(myDeck)"""

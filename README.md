@@ -2,7 +2,7 @@
 # Questão 1.
 def Subir_escadas(steps):
     """ Seja a_n o numero de formas possiveis de subir uma escada de n degrais
-    Digamos que no sua primeira ação seja subir 1 degrau, assim as formas de fazer as ações restantes serão a_(n-1)
+    Digamos que no sua primeira ação seja subir 1 degrau, assim as formas de fazer as ações restantes serão a__(n-1)
     Analogamente, se vôce subir dois, as formas são a_(n-2)
     Note que an é a saida padrão esperada de Subir_escadas(n)
     Assim, a solução por recurção é trivial"""
@@ -17,17 +17,17 @@ print(Subir_escadas(10))#89
 # Jader Duarte - Lista 2 - Prog 2
 # Eu fiz(Questão 2)
 """ 
-   def _add_(self, other_vector):
-        return super()._add_(other_vector)
-    def _mul_(self, alpha):
-        return super()._mul_(alpha)
-    def _rmul_(self, f):
-        return super()._rmul_(f)
-    def _sub_(self,other_vector):
-        return super()._add_(other_vector*(-1))
+   def __add__(self, other__vector):
+        return super().__add__(other__vector)
+    def __mul__(self, alpha):
+        return super().__mul__(alpha)
+    def __rmul__(self, f):
+        return super().__rmul__(f)
+    def __sub__(self,other__vector):
+        return super().__add__(other__vector*(-1))
     def abs(self):
         r=0
-        for i in range(self.dim):
+        for i in range(self._dim):
             r+=self.coord[i]**2
         return r**1/2
         """
@@ -40,7 +40,7 @@ class VectorSpace:
     Abstract Class of vector space used to model basic linear structures
     """
     
-    def _init_(self, dim: int, field: 'Field'):
+    def __init__(self, dim: int, field: 'Field'):
         """
         Initialize a VectorSpace instance.
 
@@ -68,9 +68,9 @@ class VectorSpace:
             str: A string representing the vector space.
         """
         return f'dim = {self.dim!r}, field = {self._field!r}'
-        # return self._repr_()
+        # return self.__repr__()
 
-    def _repr_(self):
+    def __repr__(self):
         """
         Get a string representation of the VectorSpace instance.
 
@@ -80,7 +80,7 @@ class VectorSpace:
         # return f'dim = {self.dim!r}, field = {self._field!r}'
         return self.getVectorSpace()
     
-    def _mul_(self, f):
+    def __mul__(self, f):
         """
         Multiplication operation on the vector space (not implemented).
 
@@ -92,7 +92,7 @@ class VectorSpace:
         """
         raise NotImplementedError
     
-    def _rmul_(self, f):
+    def __rmul__(self, f):
         """
         Right multiplication operation on the vector space (not implemented).
 
@@ -103,11 +103,11 @@ class VectorSpace:
             The result of multiplication.
 
         Note:
-            This method is defined in terms of _mul_.
+            This method is defined in terms of __mul__.
         """
-        return self._mul_(f)
+        return self.__mul__(f)
     
-    def _add_(self, v):
+    def __add__(self, v):
         """
         Addition operation on the vector space (not implemented).
 
@@ -121,8 +121,8 @@ class VectorSpace:
 
 class RealVector(VectorSpace):
     _field = float
-    def _init_(self, dim, coord):
-        super()._init_(dim, self._field)
+    def __init__(self, dim, coord):
+        super().__init__(dim, self._field)
         self.coord = coord
     
 
@@ -131,14 +131,14 @@ class RealVector(VectorSpace):
         raise NotImplementedError
 
 
-    def _add_(self, other_vector):
+    def __add__(self, other_vector):
         n_vector = []
         for c1, c2 in zip(self.coord, other_vector.coord):
             n_vector.append(c1+c2)
         return self._builder(n_vector)
 
 
-    def _mul_(self, alpha):
+    def __mul__(self, alpha):
         n_vector = []
         for c in self.coord:
             n_vector.append(alpha*c)
@@ -152,7 +152,7 @@ class RealVector(VectorSpace):
         return res
 
 
-    def _str_(self):
+    def __str__(self):
         ls = ['[']
         for c in self.coord[:-1]:
             ls += [f'{c:2.2f}, ']
@@ -163,29 +163,16 @@ class RealVector(VectorSpace):
 
 class Vector2D(RealVector):
     _dim = 2
-    def _init_(self, coord):
+    def __init__(self, coord):
         if len(coord) != 2:
             raise ValueError
-        super()._init_(self._dim, coord)
+        super().__init__(self._dim, coord)
 
 
     @staticmethod
     def _builder(coord):
         return Vector2D(coord)
-# Eu fiz(Questão 2)
-    def _add_(self, other_vector):
-        return super()._add_(other_vector)
-    def _mul_(self, alpha):
-        return super()._mul_(alpha)
-    def _rmul_(self, f):
-        return super()._rmul_(f)
-    def _sub_(self,other_vector):
-        return super()._add_(other_vector*(-1))
-    def abs(self):
-        r=0
-        for i in range(self.dim):
-            r+=self.coord[i]**2
-        return r**(1/2)
+    
 
     def CW(self):
         return Vector2D([-self.coord[1], self.coord[0]])
@@ -193,8 +180,55 @@ class Vector2D(RealVector):
 
     def CCW(self):
         return Vector2D([self.coord[1], -self.coord[0]])
+    
+    def __add__(self, other__vector):
+        return super().__add__(other__vector)
+    def __mul__(self, alpha):
+        return super().__mul__(alpha)
+    def __rmul__(self, f):
+        return super().__rmul__(f)
+    def __sub__(self,other__vector):
+        return super().__add__(other__vector*(-1))
+    def abs(self):
+        r=0
+        for i in range(self._dim):
+            r+=self.coord[i]**2
+        return r**1/2
+
+# Eu fiz(Questão 2)
    
-print(__name__)
+#Questão 3
+class Vector3D(RealVector):
+    _dim = 3
+    def __init__(self, coord):
+        if len(coord) != 3:
+          raise ValueError
+        super().__init__(self._dim, coord)
+    @staticmethod
+    def __builder(coord):
+        return Vector3D(coord)
+    def __add__(self, other_vector):
+        return super().__add__(other_vector)
+    def __mul__(self, alpha):
+        return super().__mul__(alpha)
+    def __rmul__(self, f):
+        return super().__rmul__(f)
+    def __sub__(self,other_vector):
+        return super().__add__(other_vector*(-1))
+    def abs(self):
+        r=0
+        for i in range(self._dim):
+            r+=self.coord[i]**2
+        return r**(1/2)
+
+    def CW(self):
+        return Vector3D([-self.coord[1], self.coord[0]])
+    
+
+    def CCW(self):
+        return Vector3D([self.coord[1], -self.coord[0]])
+
+
 if __name__ == '__main__':
     V2 = Vector2D([1, 2])
     print('V2 = ', V2)

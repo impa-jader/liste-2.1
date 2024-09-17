@@ -286,7 +286,7 @@ class Ev_polly(VectorSpace):
          for k in r.coord.keys():
              r[k]=r[k]*a
         return r
-    def __add__(self, pol2):
+    def __sub__(self, pol2):
         r= self.coord.copy()
         for k in pol2.coord.keys():
             if k in r.coord.keys():

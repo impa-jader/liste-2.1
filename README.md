@@ -180,7 +180,7 @@ class Vector2D(RealVector):
 
     def CCW(self):
         return Vector2D([self.coord[1], -self.coord[0]])
-    
+    #2
     def __add__(self, other__vector):
         return super().__add__(other__vector)
     def __mul__(self, alpha):
@@ -230,7 +230,7 @@ class Vector3D(RealVector):
         return r**(1/2)
    
 import math
-###
+### 3.b
 class Ev_polly(VectorSpace):
     _dim=math.inf
     def __init__(self,polinomio):
